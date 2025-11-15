@@ -14,19 +14,20 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="لَّقَدۡ أَحۡصَىٰهُمۡ" />
 
-<!-- Manifest Link (TRÈS IMPORTANT) - ✅ CHANGÉ -->
-<link rel="manifest" href="/quiz-numero-sans-API/manifest.json" />
+<!-- Manifest Link (TRÈS IMPORTANT) -->
+<link rel="manifest" href="/quiz-num-ro-sans-API/manifest.json" />
 
-<!-- Favicon - ✅ CHANGÉ -->
-<link rel="icon" type="image/png" href="/quiz-numero-sans-API/images/icon-192.png" />
-<link rel="apple-touch-icon" href="/quiz-numero-sans-API/images/icon-192.png" />
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/quiz-num-ro-sans-API/images/icon-192.png" />
+<link rel="apple-touch-icon" href="/quiz-num-ro-sans-API/images/icon-192.png" />
 
-<!-- Orientations - ✅ CHANGÉ -->
-<link rel="icon" sizes="192x192" href="/quiz-numero-sans-API/images/icon-192.png" />
-<link rel="icon" sizes="512x512" href="/quiz-numero-sans-API/images/icon-512.png" />
+<!-- Orientations -->
+<link rel="icon" sizes="192x192" href="/quiz-num-ro-sans-API/images/icon-192.png" />
+<link rel="icon" sizes="512x512" href="/quiz-num-ro-sans-API/images/icon-512.png" />
 
 <!-- Status Bar Color (Android) -->
 <meta name="msapplication-TileColor" content="#2c5f2d" />
+<meta name="msapplication-config" content="/quiz-num-ro-sans-API/browserconfig.xml" />
 
 <!-- Couleurs de l'app -->
 <meta name="msapplication-navbutton-color" content="#2c5f2d" />
@@ -8222,61 +8223,85 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
       verseHeader.textContent = '';
     }
   }
-  function colorVerseText(text) {
-    if (!text) return '';
-    const specialSigns = ["ۚ", "ۗ", "ۖ", "ۘ", "ۛ"];
-    const normalSigns = ["۞", "۩"];
-    function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[m]);
-    }
-    let escaped = escapeHtml(text);
-    let symbolYellowSpan = '';
-    const symbolReg = new RegExp(escapeHtml("۞"), 'g');
-    if (symbolReg.test(escaped)) {
-      symbolYellowSpan = '<span class="special-yellow">۞</span> ';
-      escaped = escaped.replace(symbolReg, '');
-    }
-    for (const s of specialSigns) {
-      const esc = escapeHtml(s);
-      escaped = escaped.replace(new RegExp(esc, 'gu'), `<span class="special-red">${esc}</span>`);
-    }
-    for (const s of normalSigns) {
-      if (s === "۞") continue;
-      const esc = escapeHtml(s);
-      escaped = escaped.replace(new RegExp(esc, 'gu'), `<span class="special-blue">${esc}</span>`);
-    }
-    let match = escaped.match(/(<span class="special-blue">۩<\/span>)$/);
-    let endSymbol = "";
-    if (match) {
-      escaped = escaped.replace(/(<span class="special-blue">۩<\/span>)$/, "").trim();
-      endSymbol = match[1];
-    }
-    const tmpDiv = document.createElement('div');
-    tmpDiv.innerHTML = escaped;
-    for (const sp of tmpDiv.querySelectorAll('span.special-red, span.special-yellow, span.special-blue')) {
-      sp.replaceWith(document.createTextNode(sp.textContent));
-    }
-    const cleanText = tmpDiv.textContent.trim();
-    if (!cleanText) return symbolYellowSpan + escaped + (endSymbol ? " " + endSymbol : '');
-    const plainWords = cleanText.split(/\s+/);
-    const tokens = escaped.split(/(\s+)/);
-    let firstIdx = -1;
-    let lastIdx = -1;
-    let wordCounter = 0;
-    for (let i = 0; i < tokens.length; i++) {
-      const plainToken = tokens[i].replace(/<[^>]+>/g, '').trim();
-      if (plainToken === '') continue;
-      if (wordCounter >= plainWords.length) break;
-      if (tokens[i].includes(plainWords[wordCounter])) {
-        if (firstIdx === -1) firstIdx = i;
-        lastIdx = i;
-        wordCounter++;
-      }
-    }
-    if (firstIdx !== -1) tokens[firstIdx] = `<span class="special-red">${tokens[firstIdx]}</span>`;
-    if (lastIdx !== -1 && lastIdx !== firstIdx) tokens[lastIdx] = `<span class="special-green">${tokens[lastIdx]}</span>`;
-    return symbolYellowSpan + tokens.join('') + (endSymbol ? " " + endSymbol : '');
+  // ============================================================================
+// FONCTION CORRIGÉE : colorVerseText - BUG DU DERNIER MOT VERT FIXÉ
+// ============================================================================
+// REMPLACE cette fonction (lignes 1786-1839) par celle-ci :
+
+function colorVerseText(text) {
+  if (!text) return '';
+  const specialSigns = ["ۚ", "ۗ", "ۖ", "ۘ", "ۛ"];
+  const normalSigns = ["۞", "۩"];
+  
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[m]);
   }
+  
+  let escaped = escapeHtml(text);
+  let symbolYellowSpan = '';
+  const symbolReg = new RegExp(escapeHtml("۞"), 'g');
+  
+  if (symbolReg.test(escaped)) {
+    symbolYellowSpan = '<span class="special-yellow">۞</span> ';
+    escaped = escaped.replace(symbolReg, '');
+  }
+  
+  for (const s of specialSigns) {
+    const esc = escapeHtml(s);
+    escaped = escaped.replace(new RegExp(esc, 'gu'), `<span class="special-red">${esc}</span>`);
+  }
+  
+  for (const s of normalSigns) {
+    if (s === "۞") continue;
+    const esc = escapeHtml(s);
+    escaped = escaped.replace(new RegExp(esc, 'gu'), `<span class="special-blue">${esc}</span>`);
+  }
+  
+  let match = escaped.match(/(<span class="special-blue">۩<\/span>)$/);
+  let endSymbol = "";
+  if (match) {
+    escaped = escaped.replace(/(<span class="special-blue">۩<\/span>)$/, "").trim();
+    endSymbol = match[1];
+  }
+  
+  // Extraire le texte pur
+  const tmpDiv = document.createElement('div');
+  tmpDiv.innerHTML = escaped;
+  for (const sp of tmpDiv.querySelectorAll('span.special-red, span.special-yellow, span.special-blue')) {
+    sp.replaceWith(document.createTextNode(sp.textContent));
+  }
+  const cleanText = tmpDiv.textContent.trim();
+  
+  if (!cleanText) return symbolYellowSpan + escaped + (endSymbol ? " " + endSymbol : '');
+  
+  // ALGORITHME CORRIGÉ : Trouver tous les mots d'abord
+  const tokens = escaped.split(/(\s+)/);
+  const wordIndices = [];
+  
+  for (let i = 0; i < tokens.length; i++) {
+    const plainToken = tokens[i].replace(/<[^>]+>/g, '').trim();
+    if (plainToken && plainToken.length > 0) {
+      wordIndices.push(i);
+    }
+  }
+  
+  // CORRECTION : Colorer le premier et dernier mot correctement
+  if (wordIndices.length > 0) {
+    const firstIdx = wordIndices[0];
+    const lastIdx = wordIndices[wordIndices.length - 1];
+    
+    if (firstIdx !== -1) {
+      tokens[firstIdx] = `<span class="special-red">${tokens[firstIdx]}</span>`;
+    }
+    
+    if (lastIdx !== -1 && lastIdx !== firstIdx) {
+      tokens[lastIdx] = `<span class="special-green">${tokens[lastIdx]}</span>`;
+    }
+  }
+  
+  return symbolYellowSpan + tokens.join('') + (endSymbol ? " " + endSymbol : '');
+}
+
   function registerAnswer(correct) {
     if (currentAyah == null) return;
     if (!traitedMap.has(currentAyah)) {
@@ -8803,29 +8828,6 @@ document.getElementById('btnFullScreen').addEventListener('click', toggleFullScr
   createDuplicateArrows();
 });
 })();
-
-if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/quiz-numero-sans-API/service-worker.js')
-          .then(registration => {
-            console.log('✅ Service Worker enregistré avec succès:', registration);
-            
-            registration.addEventListener('updatefound', () => {
-              const newWorker = registration.installing;
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  console.log('⚠️ Nouvelle version disponible. Rechargez la page.');
-                }
-              });
-            });
-          })
-          .catch(error => {
-            console.error('❌ Erreur enregistrement Service Worker:', error);
-          });
-      });
-    } else {
-      console.warn('Service Worker non supporté par ce navigateur');
-    }
 
 </script>
 </body>
