@@ -3,10 +3,39 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- PWA Essentielles -->
+<meta name="theme-color" content="#2c5f2d" />
+<meta name="description" content="Interactive Quranic verse quiz with audio, scoring, and Arabic support." />
+<meta name="mobile-web-app-capable" content="yes" />
+
+<!-- Apple iOS Specific -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="لَّقَدۡ أَحۡصَىٰهُمۡ" />
+
+<!-- Manifest Link (TRÈS IMPORTANT) -->
+<link rel="manifest" href="/quiz-num-ro-sans-API/manifest.json" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/quiz-num-ro-sans-API/images/icon-192.png" />
+<link rel="apple-touch-icon" href="/quiz-num-ro-sans-API/images/icon-192.png" />
+
+<!-- Orientations -->
+<link rel="icon" sizes="192x192" href="/quiz-num-ro-sans-API/images/icon-192.png" />
+<link rel="icon" sizes="512x512" href="/quiz-num-ro-sans-API/images/icon-512.png" />
+
+<!-- Status Bar Color (Android) -->
+<meta name="msapplication-TileColor" content="#2c5f2d" />
+<meta name="msapplication-config" content="/quiz-num-ro-sans-API/browserconfig.xml" />
+
+<!-- Couleurs de l'app -->
+<meta name="msapplication-navbutton-color" content="#2c5f2d" />
+
 <title>Quiz Versets Coran Avancé</title>
+
 <style>
+
 * { box-sizing: border-box; }
 html, body {
   height: 100%;
