@@ -1,6 +1,6 @@
 const CACHE_NAME = 'quran-quiz-cache-v1';
 const API_CACHE_NAME = 'versets-cache-v1';
-const BASE_PATH = '/quiz-num-ro-sans-API';
+const BASE_PATH = '/quiz-numero-sans-API';  // ✅ Change de /quiz-num-ro-sans-API
 
 const STATIC_ASSETS = [
   BASE_PATH + '/',

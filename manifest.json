@@ -5,34 +5,33 @@
   "description": "Interactive Quranic verse quiz with audio, scoring, and Arabic support.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "/quiz-num-ro-sans-API/",
-  "scope": "/quiz-num-ro-sans-API/",
+  "start_url": "/quiz-numero-sans-API/",
+  "scope": "/quiz-numero-sans-API/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#2c5f2d",
-  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/quiz-num-ro-sans-API/images/icon-192.png",
+      "src": "/quiz-numero-sans-API/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/quiz-num-ro-sans-API/images/icon-512.png",
+      "src": "/quiz-numero-sans-API/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/quiz-num-ro-sans-API/images/icon-maskable-192.png",
+      "src": "/quiz-numero-sans-API/images/icon-maskable-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/quiz-num-ro-sans-API/images/icon-maskable-512.png",
+      "src": "/quiz-numero-sans-API/images/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -40,13 +39,13 @@
   ],
   "screenshots": [
     {
-      "src": "/quiz-num-ro-sans-API/images/screenshot-1.png",
+      "src": "/quiz-numero-sans-API/images/screenshot-1.png",
       "type": "image/png",
       "sizes": "540x720",
       "form_factor": "narrow"
     },
     {
-      "src": "/quiz-num-ro-sans-API/images/screenshot-2.png",
+      "src": "/quiz-numero-sans-API/images/screenshot-2.png",
       "type": "image/png",
       "sizes": "720x540",
       "form_factor": "wide"

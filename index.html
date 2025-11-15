@@ -14,20 +14,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="لَّقَدۡ أَحۡصَىٰهُمۡ" />
 
-<!-- Manifest Link (TRÈS IMPORTANT) -->
-<link rel="manifest" href="/quiz-num-ro-sans-API/manifest.json" />
+<!-- Manifest Link (TRÈS IMPORTANT) - ✅ CHANGÉ -->
+<link rel="manifest" href="/quiz-numero-sans-API/manifest.json" />
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="/quiz-num-ro-sans-API/images/icon-192.png" />
-<link rel="apple-touch-icon" href="/quiz-num-ro-sans-API/images/icon-192.png" />
+<!-- Favicon - ✅ CHANGÉ -->
+<link rel="icon" type="image/png" href="/quiz-numero-sans-API/images/icon-192.png" />
+<link rel="apple-touch-icon" href="/quiz-numero-sans-API/images/icon-192.png" />
 
-<!-- Orientations -->
-<link rel="icon" sizes="192x192" href="/quiz-num-ro-sans-API/images/icon-192.png" />
-<link rel="icon" sizes="512x512" href="/quiz-num-ro-sans-API/images/icon-512.png" />
+<!-- Orientations - ✅ CHANGÉ -->
+<link rel="icon" sizes="192x192" href="/quiz-numero-sans-API/images/icon-192.png" />
+<link rel="icon" sizes="512x512" href="/quiz-numero-sans-API/images/icon-512.png" />
 
 <!-- Status Bar Color (Android) -->
 <meta name="msapplication-TileColor" content="#2c5f2d" />
-<meta name="msapplication-config" content="/quiz-num-ro-sans-API/browserconfig.xml" />
 
 <!-- Couleurs de l'app -->
 <meta name="msapplication-navbutton-color" content="#2c5f2d" />
@@ -8804,6 +8803,29 @@ document.getElementById('btnFullScreen').addEventListener('click', toggleFullScr
   createDuplicateArrows();
 });
 })();
+
+if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/quiz-numero-sans-API/service-worker.js')
+          .then(registration => {
+            console.log('✅ Service Worker enregistré avec succès:', registration);
+            
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('⚠️ Nouvelle version disponible. Rechargez la page.');
+                }
+              });
+            });
+          })
+          .catch(error => {
+            console.error('❌ Erreur enregistrement Service Worker:', error);
+          });
+      });
+    } else {
+      console.warn('Service Worker non supporté par ce navigateur');
+    }
 
 </script>
 </body>
