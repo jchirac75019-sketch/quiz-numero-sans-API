@@ -1,0 +1,54 @@
+{
+  "id": "quran-quiz-app",
+  "name": "لَّقَدۡ أَحۡصَىٰهُمۡ وَعَدَّهُمۡ عَدࣰّا",
+  "short_name": "لَّقَدۡ أَحۡصَىٰهُمۡ وَعَدَّهُمۡ عَدࣰّا",
+  "description": "Interactive Quranic verse quiz with audio, scoring, and Arabic support. Available on Windows, Android, and iOS.",
+  "start_url": "/quiz-numero/",
+  "scope": "/quiz-numero/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#2c5f2d",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/quiz-numero/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/quiz-numero/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/quiz-numero/images/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/quiz-numero/images/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/quiz-numero/images/screenshot-1.png",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/quiz-numero/images/screenshot-2.png",
+      "type": "image/png",
+      "sizes": "720x540",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["education", "productivity"]
+}
