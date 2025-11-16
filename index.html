@@ -8138,7 +8138,7 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
       verseHeader.textContent = '';
     }
   }
-  // ============================================================================
+// ============================================================================
 // FONCTION CORRIGÉE : colorVerseText - BUG DU DERNIER MOT VERT FIXÉ
 // ============================================================================
 // REMPLACE cette fonction (lignes 1786-1839) par celle-ci :
@@ -8161,17 +8161,6 @@ function colorVerseText(text) {
     escaped = escaped.replace(symbolReg, '');
   }
   
-  for (const s of specialSigns) {
-    const esc = escapeHtml(s);
-    escaped = escaped.replace(new RegExp(esc, 'gu'), `<span class="special-red">${esc}</span>`);
-  }
-  
-  for (const s of normalSigns) {
-    if (s === "۞") continue;
-    const esc = escapeHtml(s);
-    escaped = escaped.replace(new RegExp(esc, 'gu'), `<span class="special-blue">${esc}</span>`);
-  }
-  
   let match = escaped.match(/(<span class="special-blue">۩<\/span>)$/);
   let endSymbol = "";
   if (match) {
@@ -8179,28 +8168,35 @@ function colorVerseText(text) {
     endSymbol = match[1];
   }
   
-  // Extraire le texte pur
+  // ÉTAPE 1 : Séparer les symboles des mots
+  let cleanedText = escaped;
+  for (const s of specialSigns) {
+    const esc = escapeHtml(s);
+    // Remplacer le symbole par un marqueur temporaire
+    cleanedText = cleanedText.replace(new RegExp(esc, 'gu'), `|||SYMBOL|||`);
+  }
+  
   const tmpDiv = document.createElement('div');
-  tmpDiv.innerHTML = escaped;
+  tmpDiv.innerHTML = cleanedText;
   for (const sp of tmpDiv.querySelectorAll('span.special-red, span.special-yellow, span.special-blue')) {
     sp.replaceWith(document.createTextNode(sp.textContent));
   }
-  const cleanText = tmpDiv.textContent.trim();
+  const cleanPlainText = tmpDiv.textContent.trim();
   
-  if (!cleanText) return symbolYellowSpan + escaped + (endSymbol ? " " + endSymbol : '');
+  if (!cleanPlainText) return symbolYellowSpan + escaped + (endSymbol ? " " + endSymbol : '');
   
-  // ALGORITHME CORRIGÉ : Trouver tous les mots d'abord
-  const tokens = escaped.split(/(\s+)/);
+  // ÉTAPE 2 : Trouver les mots (sans les symboles)
+  const tokens = cleanedText.split(/(\s+)/);
   const wordIndices = [];
   
   for (let i = 0; i < tokens.length; i++) {
-    const plainToken = tokens[i].replace(/<[^>]+>/g, '').trim();
+    const plainToken = tokens[i].replace(/<[^>]+>/g, '').replace(/\|\|\|SYMBOL\|\|\|/g, '').trim();
     if (plainToken && plainToken.length > 0) {
       wordIndices.push(i);
     }
   }
   
-  // CORRECTION : Colorer le premier et dernier mot correctement
+  // ÉTAPE 3 : Colorer le premier et dernier mot
   if (wordIndices.length > 0) {
     const firstIdx = wordIndices[0];
     const lastIdx = wordIndices[wordIndices.length - 1];
@@ -8214,7 +8210,21 @@ function colorVerseText(text) {
     }
   }
   
-  return symbolYellowSpan + tokens.join('') + (endSymbol ? " " + endSymbol : '');
+  // ÉTAPE 4 : Restaurer les symboles avec coloration
+  let result = tokens.join('');
+  
+  for (const s of specialSigns) {
+    const esc = escapeHtml(s);
+    result = result.replace(/\|\|\|SYMBOL\|\|\|/g, `<span class="special-red">${esc}</span>`);
+  }
+  
+  for (const s of normalSigns) {
+    if (s === "۞") continue;
+    const esc = escapeHtml(s);
+    result = result.replace(new RegExp(esc, 'gu'), `<span class="special-blue">${esc}</span>`);
+  }
+  
+  return symbolYellowSpan + result + (endSymbol ? " " + endSymbol : '');
 }
 
   function registerAnswer(correct) {
