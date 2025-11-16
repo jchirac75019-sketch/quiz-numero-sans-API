@@ -490,8 +490,8 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0px 2px; /* Reduced from 6px 10px */
-  padding: 0px 2px; /* Reduced from 8px 12px */
+  gap: 0px 0px; /* Reduced from 6px 10px */
+  padding: 0px 0px; /* Reduced from 8px 12px */
   z-index: 99999;
   user-select: none;
   align-items: center;
@@ -501,7 +501,7 @@ h1 {
   display: flex;
   justify-content: center;
   width: 100%;
-  gap: 6px; /* Reduced from 10px */
+  gap: 2px; /* Reduced from 10px */
   flex-wrap: nowrap;
 }
 /* Adjusted timer container to be slightly smaller and more compact */
@@ -868,7 +868,7 @@ fixBottomBarHeight();
 
 #counters-buttons-group {
   display: flex;
-  gap: 6px;
+  gap: 2px;
 }
 
 #custom-counters-row .counter-box {
@@ -933,6 +933,20 @@ body.ios-device @media (max-width: 767px) {
   body.ios-device #left-fake-arrow-container .fake-arrow-btn,
   body.ios-device #right-fake-arrow-container .fake-arrow-btn {
     margin: 0 -2px !important;  /* réduit l’écart avec marge négative */
+  }
+#fixed-bottom-bar {
+    gap: 0px 0px !important;    /* Serré horizontalement */
+    padding: 2px 0px !important;
+  }
+  #fixed-bottom-bar > .counters-row {
+    gap: 2px;                   /* Compteurs serrés */
+  }
+  #counters-buttons-group {
+    gap: 2px !important;        /* Compteurs serrés */
+  }
+  #left-fake-arrow-container,
+  #right-fake-arrow-container {
+    margin: 0 2px !important;   /* Flèches : réduit espacement */
   }
 }
 
@@ -1009,16 +1023,17 @@ body.ios-device @media (max-width: 767px) {
   </div>
 
   <div id="timer-container" aria-live="polite" aria-atomic="true" role="group" aria-label="Contrôles du chronomètre">
-    <div id="arrow-left" class="timer-arrow" role="button" aria-label="Verset précédent" tabindex="0">←</div>
-    <div id="arrow-up" class="arrow-vertical" role="button" aria-label="Versets vers le haut" tabindex="0">↑</div>
-    <div id="timer-content">
-      <div><strong id="timer-start-label"></strong> <span id="start-time-display">--:--:--</span></div>
-      <div><strong id="timer-elapsed-label"></strong> <span id="elapsed-time-display">00:00:00</span></div>
-      <div><strong id="timer-end-label"></strong> <span id="timer-end-time">--:--:--</span></div>
-    </div>
-    <div id="arrow-down" class="arrow-vertical" role="button" aria-label="Versets vers le bas" tabindex="0">↓</div>
-    <div id="arrow-right" class="timer-arrow" role="button" aria-label="Verset suivant" tabindex="0">→</div>
+  <div id="arrow-left" class="timer-arrow" role="button" aria-label="Verset précédent" tabindex="0">←</div>
+  <div id="arrow-down" class="arrow-vertical" role="button" aria-label="Versets vers le bas" tabindex="0">↓</div>  
+  <div id="timer-content">
+    <div><strong id="timer-start-label"></strong> <span id="start-time-display">--:--:--</span></div>
+    <div><strong id="timer-elapsed-label"></strong> <span id="elapsed-time-display">00:00:00</span></div>
+    <div><strong id="timer-end-label"></strong> <span id="timer-end-time">--:--:--</span></div>
   </div>
+  <div id="arrow-up" class="arrow-vertical" role="button" aria-label="Versets vers le haut" tabindex="0">↑</div>  
+  <div id="arrow-right" class="timer-arrow" role="button" aria-label="Verset suivant" tabindex="0">→</div>
+</div>
+
 </div>
 <div id="timer-end" style="display:none; flex:none; min-width:280px; margin:0 auto 0 auto;">
   <span></span><span id="end-time-display"></span>
