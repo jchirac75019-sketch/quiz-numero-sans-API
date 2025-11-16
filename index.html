@@ -86,8 +86,8 @@ h1 {
   justify-content: flex-start;
   gap: 1rem;
   margin-bottom: 0.1em;
-  width: 95%;
-  max-width: 650px;
+  width: 98%;           /* ✅ Augmenté de 95% à 98% */
+  max-width: 800px;     /* ✅ Augmenté de 650px à 900px */
   margin-left: auto;
   margin-right: auto;
   align-items: center !important;
@@ -96,7 +96,7 @@ h1 {
   border-radius: 12px;
   box-shadow: 0 3px 15px rgb(0 0 0 / 0.08);
   user-select: none;
-  overflow-x: auto;
+  overflow-x: auto;     /* ✅ Garde le scroll horizontal */
   white-space: nowrap;
 }
 .rtl {
@@ -507,9 +507,6 @@ h1 {
 /* Adjusted timer container to be slightly smaller and more compact */
 #fixed-bottom-bar > #timer-container {
   margin: 0 auto;
-  /* margin-top: -4px;
-  /* display: flex;
-  /* align-items: flex-start;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -615,37 +612,6 @@ h1 {
 }
 /*Fin******************* Taille de police par défaut (pour tous les types d'écran) ********************' Fin/
 
-/*----------Agrandir automatiquement le bloc des versets jusqu'en bas de l'écran sur mobile ----------' Début : Que pour écran de téléphone
-
-/* Par défaut (chronomètre MASQUÉ) : bloc extensible sans scroll */
-@media (max-width: 767px) {
-  #main-scroll-container {
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow-y: visible !important; /* Pas de scroll sur le conteneur */
-  }
-  #ayat-box {
-    max-height: none;
-    height: auto;
-    margin-bottom: 140px; /* espace pour barre basse */
-    //overflow-y: visible;  /* pas de scroll dans le bloc */
-  }
-}
-
-/* Quand chronomètre VISIBLE : scroll activé dans le bloc versets */
-.show-timer #main-scroll-container {
-  height: 100vh !important;
-  overflow-y: auto !important; /* Scroll possible */
-}
-.show-timer #ayat-box {
-  max-height: calc(100vh - 140px); /* hauteur jusqu'à la barre basse */
-  height: auto;
-  margin-bottom: 0; /* Pas d'espace supplémentaire */
-  overflow-y: auto; /* Scroll interne activé */
-}
-
-/*----------Agrandir automatiquement le bloc des versets jusqu'en bas de l'écran sur mobile ----------' Fin : Que pour écran de téléphone
-
 /*########## Agrandir automatiquement le bloc des versets jusqu'en bas de l'écran sur mobile ##########' Début : Pour tous les écrans :Ordinateur, Tablette et téléphone
 
 /* Cas par défaut, chronomètre MASQUÉ : bloc versets s'étend sans scroll */
@@ -747,18 +713,7 @@ h1 {
     padding: 6px 10px;
     font-size: 0.8em;
   }
-  #fixed-bottom-bar {
-    gap: 4px 6px;
-    padding: 5px 6px;
-  }
-  #fixed-bottom-bar > .counters-row {
-    gap: 6px;
-  }
-  #fixed-bottom-bar > #timer-container {
-    max-width: calc(100vw - 70px);
-    padding: 8px 12px;
-  }
-  #timer-content {
+    #timer-content {
     flex-direction: column;
     white-space: normal;
   }
@@ -838,29 +793,6 @@ h1 {
     border-radius: 10px;
   }
 
-/* === Bande basse : hauteur fixe ajustée et suppression du débordement === */
-#fixed-bottom-bar {
-  /* height: 120px !important;       /* Hauteur totale de la barre */
-  /* overflow: hidden !important;    /* Coupe tout contenu dépassant */
-  padding: 0 !important;          /* Suppression du padding vertical */
-  gap: 8px !important;            /* Espacement minimal entre éléments */
-  align-items: center !important; /* Centrage vertical du contenu */
-}
-
-/* Ajustements pour les compteurs */
-#fixed-bottom-bar .counter-box {
-  padding: 8px 10px !important;
-  font-size: 0.9em !important;
-  line-height: 1.6 !important;
-}
-
-/* Ajustements pour le timer */
-#fixed-bottom-bar #timer-container {
-  padding: 0 8px !important;
-  font-size: 0.9em !important;
-  line-height: 1.2 !important;
-}
-
 /* Réduction de la hauteur de la bande basse dynamique */
  #fixed-bottom-bar {
    padding: 2px 4px !important;      /* padding vertical réduit à 2px */
@@ -916,38 +848,6 @@ h1 {
 #sourah-wrapper {
   margin-left: 0.5rem !important;
 }
-
-/* Hauteur de la bande basse pour Android et iOS */
-//.bande-basse {
-  //height: 80px !important; /* hauteur par défaut (Android, desktop) */
-//}
-
-//body.ios-device .bande-basse {
-  //height: 50px !important; /* hauteur réduite sur iOS */
-//padding-bottom: constant(safe-area-inset-bottom);
-//}
-
-//body.ios-device #fixed-bottom-bar {
-  //height: 50px !important;
-//}
-
-/* Nouvelle règle forte pour réduire la hauteur de la bande basse */
-//body {
-  //padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 50px) !important;
-//}
-
-//#fixed-bottom-bar {
-  //height: calc(50px + env(safe-area-inset-bottom, 0px)) !important;
-  //max-height: calc(50px + env(safe-area-inset-bottom, 0px)) !important;
-  //padding: 4px 8px !important;
-  //overflow: hidden !important;
-  //box-sizing: border-box;
-//}
-
-//function fixBottomBarHeight() {
-  //fixedBar.style.height = '50px';
-  //fixedBar.style.maxHeight = '50px';
-//}
 
 window.addEventListener('resize', fixBottomBarHeight);
 window.addEventListener('scroll', fixBottomBarHeight);
@@ -7882,7 +7782,6 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
       sourahEl.value = state.sourah || '1';
       setTexts(languageEl.value);
       updateLanguageFilterLabels(languageEl.value);
-      populateSourahOptions();
       updateLimits(false);
       startEl.value = state.start || 1;
       endEl.value = state.end || 1;
@@ -8584,16 +8483,6 @@ function colorVerseText(text) {
   document.getElementById('left-fake-arrow-container').appendChild(leftFakeArrow);
   document.getElementById('right-fake-arrow-container').appendChild(rightFakeArrow);
 
-    const leftContainer = document.getElementById('left-fake-arrow-container');
-    const rightContainer = document.getElementById('right-fake-arrow-container');
-
-    if (leftContainer) {
-      leftContainer.appendChild(leftFakeArrow);
-    }
-    if (rightContainer) {
-      rightContainer.appendChild(rightFakeArrow);
-    }
-
     setupDuplicateArrowEvents();
   }
 
@@ -8675,10 +8564,6 @@ function colorVerseText(text) {
     setupLongPressContinuous(arrowUp, moveToLastAyahAbove);
     setupLongPressContinuous(arrowDown, moveToFirstAyahBelow);
   }
-  arrowLeft.removeEventListener('click', moveToPreviousAyah);
-  arrowRight.removeEventListener('click', moveToNextAyah);
-  arrowDown.removeEventListener('click', moveToFirstAyahBelow);
-  arrowUp.removeEventListener('click', moveToLastAyahAbove);
   arrowLeft.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -8793,8 +8678,6 @@ function colorVerseText(text) {
     }
   });
   document.addEventListener('DOMContentLoaded', () => {
-  populateSourahOptions();
-  loadState();
   populateSourahOptions();
   
   if (!loadState()) {
