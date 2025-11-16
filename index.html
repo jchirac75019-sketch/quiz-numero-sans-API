@@ -458,15 +458,15 @@ h1 {
   font-weight: 700;
 }
 .counter-box {
-  padding: 6px 14px; /* slightly reduced padding */
+  padding: 6px 14px; /* ✅ Réduit de 14px à 8px */
   border-radius: 16px;
   font-weight: 700;
   text-align: center;
   color: white;
-  margin: 2px;
+  margin: 2px;            /* ✅ Changé de 2px à 0px */
   user-select: none;
-  font-size: 0.82em; /* smaller font */
-  min-width: 84px; /* reduced min-width */
+  font-size: 0.82em;       /* ✅ Réduit de 0.82em */
+  min-width: 84px;         /* ✅ Réduit de 84px à 60px */
   flex-shrink: 0;
   white-space: nowrap;
 }
@@ -712,9 +712,9 @@ h1 {
     max-height: 34px;
   }
   .counter-box {
-    min-width: 75px;
-    padding: 6px 10px;
-    font-size: 0.8em;
+    min-width: 50px;      /* ✅ Réduit de 75px à 50px */
+    padding: 4px 6px;     /* ✅ Réduit de 10px à 6px */
+    font-size: 0.7em;     /* ✅ Réduit de 0.8em à 0.7em */
   }
     #timer-content {
     flex-direction: column;
@@ -863,7 +863,7 @@ fixBottomBarHeight();
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 2px;               /* ✅ Réduit de 10px à 2px */
 }
 
 #counters-buttons-group {
