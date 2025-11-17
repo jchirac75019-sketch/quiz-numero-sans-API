@@ -1,40 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-
-<!-- PWA Essentielles -->
-<meta name="theme-color" content="#2c5f2d" />
-<meta name="description" content="Interactive Quranic verse quiz with audio, scoring, and Arabic support." />
-<meta name="mobile-web-app-capable" content="yes" />
-
-<!-- Apple iOS Specific -->
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="لَّقَدۡ أَحۡصَىٰهُمۡ" />
-
-<!-- Manifest Link (TRÈS IMPORTANT) -->
-<link rel="manifest" href="/quiz-num-ro-sans-API/manifest.json" />
-
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="/quiz-num-ro-sans-API/images/icon-192.png" />
-<link rel="apple-touch-icon" href="/quiz-num-ro-sans-API/images/icon-192.png" />
-
-<!-- Orientations -->
-<link rel="icon" sizes="192x192" href="/quiz-num-ro-sans-API/images/icon-192.png" />
-<link rel="icon" sizes="512x512" href="/quiz-num-ro-sans-API/images/icon-512.png" />
-
-<!-- Status Bar Color (Android) -->
-<meta name="msapplication-TileColor" content="#2c5f2d" />
-<meta name="msapplication-config" content="/quiz-num-ro-sans-API/browserconfig.xml" />
-
-<!-- Couleurs de l'app -->
-<meta name="msapplication-navbutton-color" content="#2c5f2d" />
-
-<title>Quiz Versets Coran Avancé</title>
-
-<style>
+    <!-- ========== ENCODAGE - CHARACTER ENCODING ========== -->
+    <meta charset="UTF-8" />
+    
+    <!-- ========== VIEWPORT - MOBILE CONFIGURATION ========== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    
+    <!-- ========== SERVICE WORKER REGISTRATION - PWA OFFLINE ==========
+         Enregistre le Service Worker pour fonctionnement hors ligne
+    ========== -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(() => {
+          console.log('✅ Service Worker enregistré avec succès');
+        }).catch(err => {
+          console.error('⚠️ Erreur enregistrement Service Worker:', err);
+        });
+      }
+    </script>
+    
+    <!-- ========== MANIFEST POUR PWA - APP INSTALLATION ==========
+         Permet installation comme app native sur téléphone + ordinateur
+    ========== -->
+    <link rel="manifest" href="/quiz-numero-sans-API/manifest.json" />
+    
+    <!-- ========== CONFIGURATION WINDOWS - WINDOWS TILE ==========
+         Pour l'épingle au menu Démarrer sur Windows
+    ========== -->
+    <meta name="msapplication-config" content="/quiz-numero-sans-API/browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#2c5f2d">
+    <meta name="msapplication-TileImage" content="/quiz-numero-sans-API/images/icon-192.png">
+    
+    <!-- ========== CONFIGURATION ANDROID - ANDROID APP ==========
+         Couleur thème pour Android + capacités web app
+    ========== -->
+    <meta name="theme-color" content="#2c5f2d" />
+    <meta name="description" content="Interactive Quranic verse quiz with audio, scoring, and Arabic support." />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- ========== CONFIGURATION iOS/APPLE - iOS APP ==========
+         Support pour iOS et macOS
+    ========== -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="لَّقَدۡ أَحۡصَىٰهُمۡ" />
+    
+    <!-- ========== FAVICON & ICÔNES - ICONS & FAVICON ==========
+         Références aux icônes pour différents appareils
+    ========== -->
+    <link rel="icon" type="image/png" href="/quiz-numero-sans-API/images/icon-192.png" />
+    <link rel="apple-touch-icon" href="/quiz-numero-sans-API/images/icon-192.png" />
+    <link rel="icon" sizes="192x192" href="/quiz-numero-sans-API/images/icon-192.png" />
+    <link rel="icon" sizes="512x512" href="/quiz-numero-sans-API/images/icon-512.png" />
+    
+    <!-- ========== TITRE DE PAGE - PAGE TITLE ========== -->
+    <title>Quiz Versets Coran Avancé</title>
+    
+    <!-- ========== STYLES INLINE - INLINE STYLES (ORIGINAL CSS PRESERVED 100%) ==========
+         Tous les styles CSS originaux conservés EXACTEMENT comme ils sont
+    ========== -->
+    <style>
 
 * { box-sizing: border-box; }
 html, body {
@@ -837,7 +863,7 @@ h1 {
   flex-wrap: wrap !important;   /* autorise le passage à la ligne */
 }
 
-/* Chaque wrapper garde sa taille minimale pour éviter d’être trop étroit */
+/* Chaque wrapper garde sa taille minimale pour éviter d'être trop étroit */
 .selector-wrapper {
   flex: 0 1 auto !important;    /* peut rétrécir mais pas trop */
   min-width: 80px !important;    /* largeur minimale à ajuster selon contenu */
@@ -909,12 +935,12 @@ fixBottomBarHeight();
 }
 
 @media (max-width: 767px) {
-  /* Réduire l’écart entre flèches dupliquées et compteurs */
+  /* Réduire l'écart entre flèches dupliquées et compteurs */
   #left-fake-arrow-container,
   #right-fake-arrow-container {
     margin: 0 4px !important;
   }
-  /* Réduire l’écart entre compteurs */
+  /* Réduire l'écart entre compteurs */
   #counters-buttons-group {
     gap: 4px !important;
   }
@@ -931,7 +957,7 @@ body.ios-device @media (max-width: 767px) {
 @media (max-width: 767px) {
   body.ios-device #left-fake-arrow-container .fake-arrow-btn,
   body.ios-device #right-fake-arrow-container .fake-arrow-btn {
-    margin: 0 -2px !important;  /* réduit l’écart avec marge négative */
+    margin: 0 -2px !important;  /* réduit l'écart avec marge négative */
   }
 #fixed-bottom-bar {
     gap: 0px 0px !important;    /* Serré horizontalement */
@@ -949,7 +975,7 @@ body.ios-device @media (max-width: 767px) {
   }
 }
 
-</style>
+    </style>
 </head>
 <body>
 <div id="main-scroll-container" tabindex="0">

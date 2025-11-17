@@ -2,7 +2,7 @@
   "id": "quran-quiz-app",
   "name": "لَّقَدۡ أَحۡصَىٰهُمۡ وَعَدَّهُمۡ عَدࣰّا",
   "short_name": "لَّقَدۡ أَحۡصَىٰهُمۡ وَعَدَّهُمۡ عَدࣰّا",
-  "description": "Interactive Quranic verse quiz with audio, scoring, and Arabic support.",
+  "description": "تطبيق متقدم لاختبار القرآن الكريم - Interactive Quranic verse quiz with audio, scoring, and Arabic support. V27 - Desktop & Mobile Compatible",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "/quiz-numero-sans-API/",
@@ -11,6 +11,7 @@
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#2c5f2d",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/quiz-numero-sans-API/images/icon-192.png",
@@ -25,13 +26,13 @@
       "purpose": "any"
     },
     {
-      "src": "/quiz-numero-sans-API/images/icon-maskable-192.png",
+      "src": "/quiz-numero-sans-API/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/quiz-numero-sans-API/images/icon-maskable-512.png",
+      "src": "/quiz-numero-sans-API/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -51,5 +52,20 @@
       "form_factor": "wide"
     }
   ],
-  "categories": ["education", "productivity", "reference"]
+  "categories": ["education", "productivity", "reference"],
+  "shortcuts": [
+    {
+      "name": "بدء الاختبار",
+      "short_name": "اختبار",
+      "description": "ابدأ اختبار القرآن الكريم فوراً",
+      "url": "/quiz-numero-sans-API/?mode=start",
+      "icons": [
+        {
+          "src": "/quiz-numero-sans-API/images/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
 }
